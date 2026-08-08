@@ -5,7 +5,7 @@ reconcile the described work against the current board snapshot, and applies
 the resulting diff via the ``ProjectV2`` GraphQL API using the primitives in
 :mod:`agent_tools`.
 
-Ported from Visual-Graph-Programming's git/scripts/sync_backlog.py, with
+Reconcile roadmap and changelog items with GitHub ProjectV2 backlog, with
 the source-document paths and project naming generalized for template reuse.
 
 Design goals:

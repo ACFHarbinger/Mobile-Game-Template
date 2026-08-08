@@ -6,7 +6,7 @@ patterns configured in ``automation_rules.yaml``, and -- if a ticket
 reference is found -- transitions that issue to ``status:in-progress`` on
 the ProjectV2 board via :mod:`agent_tools`.
 
-Ported from Visual-Graph-Programming's git/scripts/check_commit_ref.py.
+Validate commit message format and check issue references.
 
 This script is deliberately fail-open: any network/API error is logged and
 swallowed so that a flaky GitHub API call never blocks a local commit.

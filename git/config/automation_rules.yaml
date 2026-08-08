@@ -6,7 +6,6 @@
 # LLM-driven backlog agent should behave, particularly under ambiguity or
 # conflict. Keep this human-editable; the agent treats it as policy, not code.
 #
-# Adapted from Visual-Graph-Programming's git/config/automation_rules.yaml.
 
 version: 1
 

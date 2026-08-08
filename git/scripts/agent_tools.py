@@ -13,8 +13,7 @@ this repository's GitHub Project (V2) board. Each function:
 - Is side-effect-isolated: network calls live behind ``GitHubProjectClient``
   so this module can be unit-tested with a fake client.
 
-Ported from Visual-Graph-Programming's git/scripts/agent_tools.py, with
-project-specific naming generalized for template reuse.
+Utility library for GitHub ProjectV2 GraphQL automation.
 
 Environment:
     GITHUB_TOKEN: A token with ``repo`` and ``project`` scopes.
