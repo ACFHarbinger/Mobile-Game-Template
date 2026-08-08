@@ -40,6 +40,11 @@ plugins:
   - search
 
 nav:
+  - Documentation Standards: DOCUMENTATION_STANDARDS.md
+  - Benchmarks: BENCHMARKS.md
+  - Dependencies: DEPENDENCIES.md
+  - Dependency Policy: DEPENDENCY_POLICY.md
+  - Troubleshooting: TROUBLESHOOTING.md
   - Roadmap: moon/ROADMAP.md
   - Changelog: moon/CHANGELOG.md
   - Home: index.md
