@@ -2,7 +2,7 @@ import SwiftUI
 
 /// Character/skin selection screen — deliberately a simple static list stub
 /// (no IAP wiring) so it's a clear extension point rather than a half-built
-/// store integration. See `moon/roadmaps/ios.md` for the planned scope.
+/// store integration. See `docs/moon/roadmaps/ios.md` for the planned scope.
 struct ShopSkin: Identifiable {
     let id = UUID()
     let name: String

@@ -34,13 +34,13 @@
 
 ## About
 
-`Mobile-Game-Template` is a GitHub template repository for a **two-platform mobile game**: a Kotlin Android client under [`android/`](android/) and a Swift iOS client under [`ios/`](ios/). Unlike a generic app scaffold, it ships real, working (if minimal) game skeletons on both platforms — Android: a `SurfaceView`-based render surface on a fixed-timestep game loop thread; iOS: a SpriteKit `SKScene` — following each platform's official conventions exactly (standard Android Studio / Gradle Kotlin DSL layout, standard Xcode project layout). Raw assets and a documented (non-compiled) shared spec live under [`core/`](core/) — see `core/README.md` for exactly what's shared today vs. aspirational. Around all of that, it carries the same cross-cutting agentic/DevOps/docs framework (`.agent/`, `docs/`, `moon/`, `.github/`, `infra/`) used across this org's other project templates.
+`Mobile-Game-Template` is a GitHub template repository for a **two-platform mobile game**: a Kotlin Android client under [`android/`](android/) and a Swift iOS client under [`ios/`](ios/). Unlike a generic app scaffold, it ships real, working (if minimal) game skeletons on both platforms — Android: a `SurfaceView`-based render surface on a fixed-timestep game loop thread; iOS: a SpriteKit `SKScene` — following each platform's official conventions exactly (standard Android Studio / Gradle Kotlin DSL layout, standard Xcode project layout). Raw assets and a documented (non-compiled) shared spec live under [`core/`](core/) — see `core/README.md` for exactly what's shared today vs. aspirational. Around all of that, it carries the same cross-cutting agentic/DevOps/docs framework (`.agent/`, `docs/`, `docs/moon/`, `.github/`, `infra/`) used across this org's other project templates.
 
 Use **"Use this template"** on GitHub to create a new repository, rename the Android package from `com.example.gametemplate` and the iOS bundle ID from `com.example.mygame`, and start building.
 
 ## Why SurfaceView + Canvas (Android) / SpriteKit (iOS)?
 
-This template targets simple, dependency-light 2D games (arcade, puzzle, roguelike-lite) on each platform independently — it is **not** a shared cross-platform engine. Android uses `SurfaceView` + a dedicated fixed-timestep loop thread; iOS uses SpriteKit's own display-link-driven `update(_:)`, with a clamped per-frame delta for the same "don't spiral after a long pause" reason. Jetpack Compose / SwiftUI are used for chrome around each game surface (menus, HUD, settings). For 3D, physics-heavy games, or a genuinely shared cross-platform core, see [`.agent/AGENTS.md`](.agent/AGENTS.md) §1.1, [`docs/adr/0002-rendering-approach.md`](docs/adr/0002-rendering-approach.md), [`docs/adr/0003-ios-rendering-approach.md`](docs/adr/0003-ios-rendering-approach.md), and [`moon/roadmaps/shared_core.md`](moon/roadmaps/shared_core.md).
+This template targets simple, dependency-light 2D games (arcade, puzzle, roguelike-lite) on each platform independently — it is **not** a shared cross-platform engine. Android uses `SurfaceView` + a dedicated fixed-timestep loop thread; iOS uses SpriteKit's own display-link-driven `update(_:)`, with a clamped per-frame delta for the same "don't spiral after a long pause" reason. Jetpack Compose / SwiftUI are used for chrome around each game surface (menus, HUD, settings). For 3D, physics-heavy games, or a genuinely shared cross-platform core, see [`.agent/AGENTS.md`](.agent/AGENTS.md) §1.1, [`docs/adr/0002-rendering-approach.md`](docs/adr/0002-rendering-approach.md), [`docs/adr/0003-ios-rendering-approach.md`](docs/adr/0003-ios-rendering-approach.md), and [`docs/moon/roadmaps/shared_core.md`](docs/moon/roadmaps/shared_core.md).
 
 ## Repository Layout
 
@@ -78,7 +78,7 @@ Mobile-Game-Template/
 | `infra/` | **Optional** lightweight backend scaffolding for leaderboards/cloud save: `docker/`, `k8s/`, `helm/`, `terraform/`, `ansible/` — not needed for an offline game |
 | `docs/` | MkDocs site, architecture notes, ADRs (including the Android and iOS rendering-approach ADRs) |
 | `git/` | `CONTRIBUTING.md` and `codecov.yaml` |
-| `moon/` | `ROADMAP.md`, `CHANGELOG.md`, and per-topic roadmaps (including `ios.md` and `shared_core.md`) |
+| `docs/moon/` | `ROADMAP.md`, `CHANGELOG.md`, and per-topic roadmaps (including `ios.md` and `shared_core.md`) |
 | `tools/*/justfile` | `just` recipe modules — each now covers both platforms where relevant (e.g. `tools/build/justfile` has both Gradle and `xcodebuild` recipes) |
 
 ## Quick Start
@@ -120,7 +120,7 @@ See [`git/CONTRIBUTING.md`](git/CONTRIBUTING.md) for the contribution workflow, 
 ## Releasing
 
 - **Android → Play Store**: see [`.agent/skills/release-to-play-store.md`](.agent/skills/release-to-play-store.md) and [`.github/workflows/release.yml`](.github/workflows/release.yml) — tagging `vX.Y.Z` builds a signed AAB/APK and (optionally, once fastlane credentials are configured) uploads to the Play Console's internal testing track.
-- **iOS → App Store**: not automated yet — see [`moon/roadmaps/ios.md`](moon/roadmaps/ios.md); `just ios-archive` produces an unsigned `.xcarchive` as a starting point.
+- **iOS → App Store**: not automated yet — see [`docs/moon/roadmaps/ios.md`](docs/moon/roadmaps/ios.md); `just ios-archive` produces an unsigned `.xcarchive` as a starting point.
 
 ## License
 

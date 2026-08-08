@@ -25,16 +25,16 @@
 
 > **TODO:** Replace with a one-paragraph description of the actual game once this template seeds a real project.
 
-This repository is a scaffold for a **two-platform mobile game**: a Kotlin Android client (`android/`) and a Swift iOS client (`ios/`), not a product. Each ships a single, real product module — minimal but functional 2D game skeletons (Android: `SurfaceView` + a fixed-timestep loop thread; iOS: SpriteKit's `SKScene`) — plus the cross-cutting agentic/DevOps/docs framework shared across this org's other templates (`.agent/`, `docs/`, `moon/`, `.github/`, `infra/`). A `core/` module holds shared raw assets and a documented (not compiled) state-machine/level spec both clients implement independently — see [`core/README.md`](../core/README.md) before assuming any logic is actually shared. When used via "Use this template", update this section first.
+This repository is a scaffold for a **two-platform mobile game**: a Kotlin Android client (`android/`) and a Swift iOS client (`ios/`), not a product. Each ships a single, real product module — minimal but functional 2D game skeletons (Android: `SurfaceView` + a fixed-timestep loop thread; iOS: SpriteKit's `SKScene`) — plus the cross-cutting agentic/DevOps/docs framework shared across this org's other templates (`.agent/`, `docs/`, `docs/moon/`, `.github/`, `infra/`). A `core/` module holds shared raw assets and a documented (not compiled) state-machine/level spec both clients implement independently — see [`core/README.md`](../core/README.md) before assuming any logic is actually shared. When used via "Use this template", update this section first.
 
 ### 1.1 Why SurfaceView + Canvas (Android) / SpriteKit (iOS), not Compose-only, SwiftUI-only, or a game engine
 
-This template targets **simple, dependency-light 2D games** (arcade, puzzle, roguelike-lite) on each platform independently — it is **not** a shared cross-platform engine (see `moon/roadmaps/shared_core.md` for that option, not adopted by default). Each client uses its platform's idiomatic, zero-extra-dependency 2D approach, decoupled from its declarative-UI framework's recomposition/re-render timing:
+This template targets **simple, dependency-light 2D games** (arcade, puzzle, roguelike-lite) on each platform independently — it is **not** a shared cross-platform engine (see `docs/moon/roadmaps/shared_core.md` for that option, not adopted by default). Each client uses its platform's idiomatic, zero-extra-dependency 2D approach, decoupled from its declarative-UI framework's recomposition/re-render timing:
 
 | If your game needs... | Consider instead |
 | --- | --- |
 | Menus, HUD, settings screens, leaderboards UI | Keep those in Jetpack Compose (Android, [`ui_compose.md`](rules/ui_compose.md)) / SwiftUI (iOS, [`swift.md`](rules/swift.md)) layered *around* the game surface — this template already does this for the main menu on both platforms. |
-| 3D rendering, physics engine, or a genuinely shared cross-platform codebase | [LibGDX](https://libgdx.com/)/[Godot](https://godotengine.org/) (Android), or revisit `moon/roadmaps/shared_core.md`'s KMP/Rust options — swap the platform-native surface/loop for the engine's own and keep everything else in this template (`.agent/`, CI, docs, infra). |
+| 3D rendering, physics engine, or a genuinely shared cross-platform codebase | [LibGDX](https://libgdx.com/)/[Godot](https://godotengine.org/) (Android), or revisit `docs/moon/roadmaps/shared_core.md`'s KMP/Rust options — swap the platform-native surface/loop for the engine's own and keep everything else in this template (`.agent/`, CI, docs, infra). |
 | Compose-only / SwiftUI-only rendering (shaders via `Canvas`/`Modifier.drawWithCache`, or SwiftUI `Canvas`) | Viable for lower-frequency/simpler games; see [ADR 0002](../docs/adr/0002-rendering-approach.md) (Android) and [ADR 0003](../docs/adr/0003-ios-rendering-approach.md) (iOS) for the tradeoffs we weighed on each platform. |
 
 ## 2. Technical Stack & Governance
@@ -85,7 +85,7 @@ This template targets **simple, dependency-light 2D games** (arcade, puzzle, rog
 | `just ios-build` | `xcodebuild ... -destination 'generic/platform=iOS Simulator' build` | iOS (macOS host) |
 | `just ios-test` | `xcodebuild ... test` — runs the `ios/Tests/` XCTest suite on a simulator | iOS (macOS host) |
 | `just ios-check` | `xcodebuild ... analyze` | iOS (macOS host) |
-| `just ios-archive` | `xcodebuild ... archive` — unsigned `.xcarchive`, see `moon/roadmaps/ios.md` | iOS (macOS host) |
+| `just ios-archive` | `xcodebuild ... archive` — unsigned `.xcarchive`, see `docs/moon/roadmaps/ios.md` | iOS (macOS host) |
 
 ## 5. Coding Standards
 
@@ -126,5 +126,5 @@ This template targets **simple, dependency-light 2D games** (arcade, puzzle, rog
 
 - This template repository does not ship a complete game on either platform — `engine/`/`Engine/` contain illustrative skeletons (a bouncing-entity demo on Android, a top-down shooter skeleton on iOS), not final or even matching gameplay. See the documented Android/iOS asymmetry in `core/src/game-state-machine.md`.
 - The optional backend under `infra/` is unimplemented scaffolding — see each `infra/*/README.md` before assuming any service exists.
-- `core/` is assets + documentation only, not a compiled shared module — see `core/README.md` and `moon/roadmaps/shared_core.md` before assuming any logic is actually shared between the two clients.
+- `core/` is assets + documentation only, not a compiled shared module — see `core/README.md` and `docs/moon/roadmaps/shared_core.md` before assuming any logic is actually shared between the two clients.
 - The iOS client cannot be built, tested, or run inside `.devcontainer/` (Linux-only) — it requires a native macOS host or a `macos-latest` CI runner.

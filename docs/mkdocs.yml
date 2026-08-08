@@ -40,6 +40,8 @@ plugins:
   - search
 
 nav:
+  - Roadmap: moon/ROADMAP.md
+  - Changelog: moon/CHANGELOG.md
   - Home: index.md
   - Architecture: ARCHITECTURE.md
   - Development: DEVELOPMENT.md
