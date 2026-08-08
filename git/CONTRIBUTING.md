@@ -1,13 +1,13 @@
 # Contributing to Mobile-Game-Template
 
-[![Kotlin](https://img.shields.io/badge/Kotlin-2.0-7F52FF?logo=kotlin&logoColor=white)](https://kotlinlang.org/)
-[![Android](https://img.shields.io/badge/Android-API_24%2B-3DDC84?logo=android&logoColor=white)](https://developer.android.com/)
-[![Swift](https://img.shields.io/badge/Swift-5.0-F05138?logo=swift&logoColor=white)](https://swift.org/)
-[![iOS](https://img.shields.io/badge/iOS-16%2B-000000?logo=apple&logoColor=white)](https://developer.apple.com/ios/)
+[![Python](https://img.shields.io/badge/Python-3.11+-3776ab?logo=python&logoColor=white)](https://www.python.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Rust](https://img.shields.io/badge/Rust-1.80%2B-000000?logo=rust&logoColor=white)](https://www.rust-lang.org/)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
 [![CI](https://github.com/ACFHarbinger/Mobile-Game-Template/actions/workflows/ci.yml/badge.svg)](https://github.com/ACFHarbinger/Mobile-Game-Template/actions/workflows/ci.yml)
 
-> **Version**: 2.0
-> **Last Updated**: 2026-08-03
+> **Version**: 1.0
+> **Last Updated**: 2026-07-30
 
 Thank you for your interest in contributing! This document covers setup, style, and the PR process for repositories generated from this template.
 
@@ -29,8 +29,7 @@ Thank you for your interest in contributing! This document covers setup, style, 
 
 ### 1.1 Prerequisites
 
-- **Android**: Android Studio (or JDK 17 + Android SDK cmdline-tools), Android SDK Platform 35 + Build-Tools 35.0.0.
-- **iOS**: a native macOS host with Xcode 15+ — there is no Linux/devcontainer path for iOS, see [`.devcontainer/README.md`](../.devcontainer/README.md).
+- Git, and the toolchain(s) for whichever language module(s) you're touching: `uv` (Python), `npm` (TypeScript), Gradle/JDK 21 (Kotlin), `cargo` (Rust), Go 1.22+ (Go), CMake + a C++17 compiler (C++).
 - [`just`](https://github.com/casey/just) as the command runner.
 - `pre-commit` (`pip install pre-commit && pre-commit install`).
 
@@ -39,16 +38,17 @@ Thank you for your interest in contributing! This document covers setup, style, 
 ```bash
 git clone https://github.com/<org>/<repo>.git
 cd <repo>
+cp .env.example .env
 just --list
 ```
 
 ## 2. Development Setup
 
-Two product modules: `android/app/`, a standard Android Studio Gradle module, and `ios/MyGame/`, a standard Xcode project. Raw shared assets and a documented spec live under `core/` — see [`core/README.md`](../core/README.md). See [`docs/DEVELOPMENT.md`](../docs/DEVELOPMENT.md) for full setup on both platforms and [`.devcontainer/devcontainer.json`](../.devcontainer/devcontainer.json) for a one-click containerized **Android** setup.
+Each language module is self-contained under its own top-level directory (`python/`, `typescript/`, `kotlin/`, `rust/`, `go/`, `cpp/`) with its own dependency manifest, `src/`, `test/`, `benchmark/`, and `config/`. See `.devcontainer/devcontainer.json` for a one-click containerized setup.
 
 ## 3. Code Style Guidelines
 
-Follow [`.agent/rules/kotlin.md`](../.agent/rules/kotlin.md) / [`.agent/rules/swift.md`](../.agent/rules/swift.md) and the rest of `.agent/rules/`. Formatting/linting is automated via `.pre-commit-config.yaml` — run `pre-commit run --all-files` before pushing.
+Follow the per-language rules in [`.agent/rules/`](../.agent/rules/). All modules are linted/formatted automatically via `.pre-commit-config.yaml` — run `pre-commit run --all-files` before pushing.
 
 ## 4. Git Workflow
 
@@ -58,14 +58,14 @@ Follow [`.agent/rules/kotlin.md`](../.agent/rules/kotlin.md) / [`.agent/rules/sw
 
 ## 5. Pull Request Process
 
-1. Fill out the [PR template](../.github/PULL_REQUEST_TEMPLATE.md) in full, including the platform(s) affected.
-2. Ensure CI is green: Android changes need `just lint-check && just unit-test`; iOS changes need `just ios-check && just ios-test` (macOS host).
+1. Fill out the [PR template](../.github/PULL_REQUEST_TEMPLATE.md) in full.
+2. Ensure CI is green (`just lint && just test`).
 3. Request review; address feedback with new commits (don't force-push during review).
 4. Squash-merge once approved.
 
 ## 6. Testing Requirements
 
-Every new Android `engine/` class needs a unit test; every new Android lifecycle/UI-touching change needs an instrumented test. Every new iOS `Engine/`/`Core/` type needs an `ios/Tests/` case. Changes to shared behavior (state machine, level schema) need `core/src/` updated alongside both platforms' implementations. See [`.agent/rules/testing_qa.md`](../.agent/rules/testing_qa.md).
+Every new public function/class needs a test. See [`.agent/rules/test_writing.md`](../.agent/rules/test_writing.md).
 
 ## 7. Issue Reporting
 
