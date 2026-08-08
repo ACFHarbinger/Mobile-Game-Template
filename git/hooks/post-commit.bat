@@ -9,7 +9,6 @@ setlocal
 for /f "delims=" %%R in ('git rev-parse --show-toplevel 2^>nul') do set REPO_ROOT=%%R
 if "%REPO_ROOT%"=="" exit /b 0
 
-set PYTHON_BIN=python
 set CHECK_SCRIPT=%REPO_ROOT%\git\scripts\check_commit_ref.py
 set COMMIT_MSG_FILE=%REPO_ROOT%\.git\COMMIT_EDITMSG
 
