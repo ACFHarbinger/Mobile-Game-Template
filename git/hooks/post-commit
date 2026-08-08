@@ -31,7 +31,7 @@ if ! command -v "${PYTHON_BIN}" >/dev/null 2>&1; then
   exit 0
 fi
 
-(cd "${REPO_ROOT}" && uv run --project git python -m git.scripts.check_commit_ref --commit-msg-file "${COMMIT_MSG_FILE}") || {
+(cd "${REPO_ROOT}" && uv run python -m git.scripts.check_commit_ref --commit-msg-file "${COMMIT_MSG_FILE}") || {
   echo "post-commit: ticket reference check reported an issue (non-blocking)" >&2
 }
 

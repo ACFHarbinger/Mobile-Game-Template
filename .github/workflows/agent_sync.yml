@@ -47,8 +47,8 @@ jobs:
 
       - name: Validate automation config
         run: |
-          uv run --project git python -c "import json,pathlib; json.loads(pathlib.Path('git/config/project_labels.json').read_text())"
-          uv run --project git python -c "import yaml,pathlib; yaml.safe_load(pathlib.Path('git/config/automation_rules.yaml').read_text())"
+          uv run python -c "import json,pathlib; json.loads(pathlib.Path('git/config/project_labels.json').read_text())"
+          uv run python -c "import yaml,pathlib; yaml.safe_load(pathlib.Path('git/config/automation_rules.yaml').read_text())"
 
       - name: Run backlog sync
         env:
@@ -62,7 +62,7 @@ jobs:
           if [ "${ inputs.dry_run }" = "true" ]; then
             ARGS="$ARGS --dry-run"
           fi
-          uv run --project git python -m git.scripts.sync_backlog $ARGS
+          uv run python -m git.scripts.sync_backlog $ARGS
 
       - name: Summarize run
         if: always()
