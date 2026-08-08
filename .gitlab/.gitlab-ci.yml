@@ -5,11 +5,11 @@
 # workflow_dispatch-triggered job in the .github source to translate).
 
 stages:
+  - sync
   - test
   - build
   - docs
   - release
-
 variables:
   GIT_DEPTH: "1"
 
@@ -178,3 +178,25 @@ create-release:
 
 # iOS release (App Store Connect signing/export) is not automated here --
 # see moon/roadmaps/ios.md.
+
+# ==========================================
+# STAGE: SYNC (agent_sync.yml)
+# ==========================================
+agent-backlog-sync:
+    stage: sync
+    image: python:3.12
+    rules:
+        - if: "$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH"
+          changes:
+              - "docs/moon/ROADMAP.md"
+              - "docs/moon/CHANGELOG.md"
+        - if: '$CI_PIPELINE_SOURCE == "web"'
+    before_script:
+        - pip install uv
+        - uv sync --project git
+    script:
+        - uv run --project git python -c "import json,pathlib; json.loads(pathlib.Path('git/config/project_labels.json').read_text())"
+        - uv run --project git python -c "import yaml,pathlib; yaml.safe_load(pathlib.Path('git/config/automation_rules.yaml').read_text())"
+        - uv run --project git python -m git.scripts.sync_backlog --repo-owner ACFHarbinger --repo-name Mobile-Game-Template --project-id "$PROJECT_ID"
+    variables:
+        GITHUB_TOKEN: $PROJECT_AUTOMATION_TOKEN
