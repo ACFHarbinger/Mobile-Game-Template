@@ -7,7 +7,7 @@ Description: Serverless Backend stack for the Mobile Game Template.
 
 Resources:
   # DynamoDB Database Table
-  Mobile_game_templateTable:
+  MobileGameTemplateTable:
     Type: AWS::Serverless::SimpleTable
     Properties:
       PrimaryKey:
@@ -18,7 +18,7 @@ Resources:
         WriteCapacityUnits: 5
 
   # Lambda Function
-  Mobile_game_templateFunction:
+  MobileGameTemplateFunction:
     Type: AWS::Serverless::Function
     Properties:
       Handler: handler.lambda_handler
@@ -26,10 +26,10 @@ Resources:
       CodeUri: ./src
       Environment:
         Variables:
-          TABLE_NAME: !Ref Mobile_game_templateTable
+          TABLE_NAME: !Ref MobileGameTemplateTable
       Policies:
         - DynamoDBCrudPolicy:
-            TableName: !Ref Mobile_game_templateTable
+            TableName: !Ref MobileGameTemplateTable
       Events:
         ApiEvent:
           Type: Api
