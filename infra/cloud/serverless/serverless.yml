@@ -1,7 +1,7 @@
 # infra/cloud/serverless/serverless.yml
 # Serverless Framework configuration.
 
-service: polyglot-app-service
+service: mobile-game-template-service
 
 frameworkVersion: '3'
 
