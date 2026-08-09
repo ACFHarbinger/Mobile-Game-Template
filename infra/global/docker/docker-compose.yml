@@ -1,7 +1,7 @@
 services:
   backend:
     build:
-      context: ../../../../..
+      context: ../../..
       dockerfile: infra/global/docker/Dockerfile
     ports:
       - "8080:8080"
