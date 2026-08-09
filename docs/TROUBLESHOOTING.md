@@ -18,7 +18,7 @@ Confirm CMake ≥ 3.20 and a C++17-capable compiler are on `PATH`. If using vcpk
 
 ## Docker Compose stack won't start
 
-Check `.env` exists (`cp .env.example .env`) and that the ports in `infra/docker/docker-compose.yml` aren't already bound by another local service.
+Check `.env` exists (`cp .env.example .env`) and that the ports in `infra/global/docker/docker-compose.yml` aren't already bound by another local service.
 
 ## Pre-commit hook fails on a hook I don't have installed locally
 
